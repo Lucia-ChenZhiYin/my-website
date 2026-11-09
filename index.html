@@ -103,82 +103,83 @@
     <footer>
         <p>© 2026 Lucia's Portfolio</p>
     </footer>
-    
-    const username = "Lucia-ChenZhiYin";
-    
-    const projectList = document.getElementById("project-list");
-    
-    // 從 GitHub API 取得公開專案
-    async function loadProjects() {
-        try {
-            const response = await fetch(
-                `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
-            );
-    
-            if (!response.ok) {
-                throw new Error("GitHub API request failed");
-            }
-    
-            const projects = await response.json();
-    
-            // 排除作品集網站本身
-            const filteredProjects = projects.filter(project =>
-                project.name !== "Lucia-ChenZhiYin.github.io"
-            );
-    
-            projectList.innerHTML = "";
-    
-            if (filteredProjects.length === 0) {
-                projectList.textContent = "目前還沒有其他公開專案。";
-                return;
-            }
-    
-            // 逐一產生作品卡片
-            filteredProjects.forEach(project => {
-                const card = document.createElement("div");
-                card.className = "project";
-    
-                const title = document.createElement("h3");
-                title.textContent = project.name;
-    
-                const description = document.createElement("p");
-                description.textContent =
-                    project.description || "目前尚未提供專案說明。";
-    
-                const language = document.createElement("p");
-                language.textContent =
-                    "Language: " + (project.language || "未指定");
-    
-                const updated = document.createElement("p");
-                updated.textContent =
-                    "Last updated: " +
-                    new Date(project.updated_at).toLocaleDateString("zh-TW");
-    
-                const link = document.createElement("a");
-                link.href = project.html_url;
-                link.textContent = "View on GitHub";
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-    
-                card.appendChild(title);
-                card.appendChild(description);
-                card.appendChild(language);
-                card.appendChild(updated);
-                card.appendChild(link);
-    
-                projectList.appendChild(card);
-            });
-    
-        } catch (error) {
-            console.error(error);
-            projectList.textContent =
-                "無法載入專案，請稍後再試。";
-        }
-    }
-    
-    // 網頁載入時執行
-    loadProjects();
 
+    <script>
+        const username = "Lucia-ChenZhiYin";
+        
+        const projectList = document.getElementById("project-list");
+        
+        // 從 GitHub API 取得公開專案
+        async function loadProjects() {
+            try {
+                const response = await fetch(
+                    `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
+                );
+        
+                if (!response.ok) {
+                    throw new Error("GitHub API request failed");
+                }
+        
+                const projects = await response.json();
+        
+                // 排除作品集網站本身
+                const filteredProjects = projects.filter(project =>
+                    project.name !== "Lucia-ChenZhiYin.github.io"
+                );
+        
+                projectList.innerHTML = "";
+        
+                if (filteredProjects.length === 0) {
+                    projectList.textContent = "目前還沒有其他公開專案。";
+                    return;
+                }
+        
+                // 逐一產生作品卡片
+                filteredProjects.forEach(project => {
+                    const card = document.createElement("div");
+                    card.className = "project";
+        
+                    const title = document.createElement("h3");
+                    title.textContent = project.name;
+        
+                    const description = document.createElement("p");
+                    description.textContent =
+                        project.description || "目前尚未提供專案說明。";
+        
+                    const language = document.createElement("p");
+                    language.textContent =
+                        "Language: " + (project.language || "未指定");
+        
+                    const updated = document.createElement("p");
+                    updated.textContent =
+                        "Last updated: " +
+                        new Date(project.updated_at).toLocaleDateString("zh-TW");
+        
+                    const link = document.createElement("a");
+                    link.href = project.html_url;
+                    link.textContent = "View on GitHub";
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+        
+                    card.appendChild(title);
+                    card.appendChild(description);
+                    card.appendChild(language);
+                    card.appendChild(updated);
+                    card.appendChild(link);
+        
+                    projectList.appendChild(card);
+                });
+        
+            } catch (error) {
+                console.error(error);
+                projectList.textContent =
+                    "無法載入專案，請稍後再試。";
+            }
+        }
+        
+        // 網頁載入時執行
+        loadProjects();
+    </script>
 </body>
 </html>
 
