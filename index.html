@@ -405,10 +405,11 @@
                 // 排除作品集網站本身
 
                 const filteredProjects = projects.filter(project =>
-                    project.name !== "Lucia-ChenZhiYin/my-website" &&
+                   ![ project.name !== "my-website" &&
+                    project.name !== "Lucia-ChenZhiYin.github.io" &&
+                    ].includes(project.full_name) &&
                     !project.fork
                 );
-
 
                 projectList.innerHTML = "";
 
