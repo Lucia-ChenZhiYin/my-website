@@ -1,185 +1,545 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucia | The Project that i'm working on</title>
+
+    <title>Lucia | My Portfolio</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #C7C7E2;
-            color: #333;
+
+        /* ===== 1. 全站基本設定 ===== */
+
+        * {
+            box-sizing: border-box;
         }
 
-        header {
-            background-color: #263849;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
+        body {
+            margin: 0;
+            font-family: Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8f9fb;
+            color: #303846;
+            line-height: 1.6;
         }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* ===== 2. 頂部導覽列 ===== */
 
         nav {
-            background-color: #34495e;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            margin-bottom: 40px;
-        }
-
-        .project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
             background-color: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
+            border-bottom: 1px solid #eeeeee;
         }
 
-        .project a {
-            color: #2673ad;
-            text-decoration: none;
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
         }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #5277a5;
+        }
+
+
+        /* ===== 3. 個人介紹區 ===== */
+
+        .hero {
+            max-width: 1100px;
+            margin: 65px auto;
+            padding: 0 25px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #747e8e;
+            font-size: 16px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background-color: #eaf0f7;
+            color: #536e8e;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+
+        /* ===== 4. 作品展示區 ===== */
+
+        .projects-section {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 25px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .section-title p {
+            color: #87909d;
+            font-size: 14px;
+        }
+
+
+        /* ===== 5. 自動排列的卡片網格 ===== */
+
+        .project-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 22px;
+        }
+
+
+        /* ===== 6. 單一作品卡片 ===== */
+
+        .project-card {
+            background-color: white;
+            border: 1px solid #edf0f3;
+            border-radius: 15px;
+            overflow: hidden;
+
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        }
+
+
+        /* ===== 7. 卡片上方的插畫圖示 ===== */
+
+        .project-art {
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 55px;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .project-description {
+            color: #7b8491;
+            font-size: 14px;
+            min-height: 44px;
+            overflow-wrap: anywhere;
+        }
+
+        .project-language {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 10px;
+            background-color: #f0f3f7;
+            color: #62758d;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .project-link {
+            display: block;
+            margin-top: 18px;
+            color: #5277a5;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+
+        /* ===== 8. 載入與錯誤訊息 ===== */
+
+        .message {
+            color: #87909d;
+            padding: 20px 0;
+        }
+
+
+        /* ===== 9. 頁尾 ===== */
 
         footer {
-            background-color: #263849;
-            color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            background-color: white;
+            color: #929ba7;
+            font-size: 13px;
+            border-top: 1px solid #eeeeee;
         }
+
+
+        /* ===== 10. 手機版調整 ===== */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 18px 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .hero {
+                margin: 45px auto;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .project-list {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <header>
-        <h1>Hi, I'm Lucia</h1>
-        <p>Welcome to My Personal Portfolio</p>
-        <p>Learning | Programming | Data Analysis | AI</p>
-    </header>
+    <!-- ===== 個人導覽列 ===== -->
 
     <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+
+        <div class="logo">Lucia.</div>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+
     </nav>
 
-    <main>
 
-        <section id="about">
-            <h2>About Me</h2>
+    <!-- ===== 個人介紹 ===== -->
+
+    <header class="hero" id="about">
+
+        <h1>Hello, I'm Lucia.</h1>
+
+        <p>
+            A little space for my projects and experiments.
+        </p>
+
+        <div class="tags">
+            <span class="tag">Programming</span>
+            <span class="tag">Data Analysis</span>
+            <span class="tag">Artificial Intelligence</span>
+        </div>
+
+    </header>
+
+
+    <!-- ===== 作品展示 ===== -->
+
+    <main class="projects-section" id="projects">
+
+        <div class="section-title">
+
+            <h2>Selected Projects</h2>
+
             <p>
-                Hello! I'm Lucia.
-                This website is where I collect my programming,
-                data analysis, and AI projects.
+                Explore my work and experiments.
             </p>
-        </section>
 
-        <section id="projects">
-            <h2>My Projects</h2>
+        </div>
 
-            <p>Here are my GitHub projects.</p>
+        <div class="project-list" id="project-list">
 
-            <div id="project-list">
-                <p>Loading projects...</p>
-            </div>
-        </section>
+            <p class="message">Loading projects...</p>
+
+        </div>
 
     </main>
 
-    <footer>
+
+    <!-- ===== 聯絡資訊 ===== -->
+
+    <footer id="contact">
+
+        <p>
+            GitHub:
+            <a href="https://github.com/Lucia-ChenZhiYin"
+               target="_blank"
+               rel="noopener noreferrer">
+                Lucia-ChenZhiYin
+            </a>
+        </p>
+
         <p>© 2026 Lucia's Portfolio</p>
+
     </footer>
 
+
+    <!-- ===== GitHub API 自動讀取功能 ===== -->
+
     <script>
+
         const username = "Lucia-ChenZhiYin";
-        
+
         const projectList = document.getElementById("project-list");
-        
-        // 從 GitHub API 取得公開專案
+
+
+        // 根據專案資訊選擇插畫圖示
+
+        function getProjectIcon(project) {
+
+            const text = (
+                project.name + " " +
+                (project.description || "") + " " +
+                (project.language || "")
+            ).toLowerCase();
+
+            if (
+                text.includes("ai") ||
+                text.includes("agent") ||
+                text.includes("machine learning")
+            ) {
+                return { icon: "🤖", color: "#F0EAF8" };
+            }
+
+            if (
+                text.includes("data") ||
+                text.includes("analysis") ||
+                text.includes("analytics")
+            ) {
+                return { icon: "📊", color: "#E8F2EB" };
+            }
+
+            if (
+                text.includes("finance") ||
+                text.includes("money") ||
+                text.includes("account") ||
+                text.includes("budget")
+            ) {
+                return { icon: "💰", color: "#E8EFF8" };
+            }
+
+            if (text.includes("python")) {
+                return { icon: "🐍", color: "#F2F0E5" };
+            }
+
+            if (text.includes("java")) {
+                return { icon: "☕", color: "#F8EEE4" };
+            }
+
+            if (
+                text.includes("web") ||
+                text.includes("html") ||
+                text.includes("css")
+            ) {
+                return { icon: "💻", color: "#E8EFF8" };
+            }
+
+            return { icon: "📁", color: "#F0F1F4" };
+
+        }
+
+
+        // 從 GitHub 取得公開專案
+
         async function loadProjects() {
+
             try {
+
                 const response = await fetch(
                     `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
                 );
-        
+
                 if (!response.ok) {
                     throw new Error("GitHub API request failed");
                 }
-        
+
                 const projects = await response.json();
-        
+
+
                 // 排除作品集網站本身
+
                 const filteredProjects = projects.filter(project =>
-                    project.name !== "Lucia-ChenZhiYin.github.io"
+                    project.name !== "Lucia-ChenZhiYin.github.io" &&
+                    !project.fork
                 );
-        
+
+
                 projectList.innerHTML = "";
-        
+
+
                 if (filteredProjects.length === 0) {
-                    projectList.textContent = "目前還沒有其他公開專案。";
+
+                    projectList.textContent =
+                        "目前還沒有其他公開專案。";
+
                     return;
+
                 }
-        
-                // 逐一產生作品卡片
+
+
+                // 逐一建立作品卡片
+
                 filteredProjects.forEach(project => {
-                    const card = document.createElement("div");
-                    card.className = "project";
-        
+
+                    const card = document.createElement("a");
+
+                    card.className = "project-card";
+
+                    card.href = project.html_url;
+
+                    card.target = "_blank";
+
+                    card.rel = "noopener noreferrer";
+
+
+                    // 取得插畫圖示
+
+                    const art = getProjectIcon(project);
+
+
+                    // 卡片上方圖示
+
+                    const image = document.createElement("div");
+
+                    image.className = "project-art";
+
+                    image.style.backgroundColor = art.color;
+
+                    image.textContent = art.icon;
+
+                    image.setAttribute("aria-hidden", "true");
+
+
+                    // 卡片內容
+
+                    const content = document.createElement("div");
+
+                    content.className = "project-content";
+
+
+                    // 專案名稱
+
                     const title = document.createElement("h3");
+
                     title.textContent = project.name;
-        
+
+
+                    // 專案說明
+
                     const description = document.createElement("p");
+
+                    description.className = "project-description";
+
                     description.textContent =
-                        project.description || "請點擊進入了解詳情。";
-        
-                    const language = document.createElement("p");
+                        project.description ||
+                        "目前尚未提供專案說明。";
+
+
+                    // 程式語言
+
+                    const language = document.createElement("span");
+
+                    language.className = "project-language";
+
                     language.textContent =
-                        "Language: " + (project.language || "中文");
-        
-                    const updated = document.createElement("p");
-                    updated.textContent =
-                        "Last updated: " +
-                        new Date(project.updated_at).toLocaleDateString("zh-TW");
-        
-                    const link = document.createElement("a");
-                    link.href = project.html_url;
-                    link.textContent = "View on GitHub";
-                    link.target = "_blank";
-                    link.rel = "noopener noreferrer";
-        
-                    card.appendChild(title);
-                    card.appendChild(description);
-                    card.appendChild(language);
-                    card.appendChild(updated);
-                    card.appendChild(link);
-        
+                        project.language || "Other";
+
+
+                    // 前往 GitHub
+
+                    const link = document.createElement("div");
+
+                    link.className = "project-link";
+
+                    link.textContent = "View Project →";
+
+
+                    // 組合卡片
+
+                    content.appendChild(title);
+
+                    content.appendChild(description);
+
+                    content.appendChild(language);
+
+                    content.appendChild(link);
+
+
+                    card.appendChild(image);
+
+                    card.appendChild(content);
+
+
                     projectList.appendChild(card);
+
                 });
-        
-            } catch (error) {
+
+            }
+
+            catch (error) {
+
                 console.error(error);
+
                 projectList.textContent =
                     "無法載入專案，請稍後再試。";
-            }
-        }
-        
-        // 網頁載入時執行
-        loadProjects();
-    </script>
-</body>
-</html>
 
+            }
+
+        }
+
+
+        // 網頁載入時執行
+
+        loadProjects();
+
+    </script>
+
+</body>
+
+</html>
